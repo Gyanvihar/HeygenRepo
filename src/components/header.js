@@ -1,6 +1,7 @@
 // Header.js
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import '../App.css';
 
@@ -9,7 +10,7 @@ const Header = () => {
     const [featuresOpen, setFeaturesOpen] = useState(false);
     const [resourcesOpen, setResourcesOpen] = useState(false);
 
-    const toggleDropdown = (dropdown) => {
+    const handleMouseEnter = (dropdown) => {
         switch (dropdown) {
             case 'useCases':
                 setUseCasesOpen(!useCasesOpen);
@@ -32,6 +33,12 @@ const Header = () => {
                 setResourcesOpen(false);
                 break;
         }
+    };
+
+    const handleMouseLeave = () => {
+        setUseCasesOpen(false);
+        setFeaturesOpen(false);
+        setResourcesOpen(false);
     };
 
     return (
@@ -68,6 +75,8 @@ const Header = () => {
                         data-delay={200}
                         data-w-id="ce73bc21-47e3-718d-4aed-ec1abf19dc5e"
                         className={`navbar_menu-dropdown w-dropdown ${useCasesOpen ? 'open' : ''}`}
+                onMouseEnter={() => handleMouseEnter('useCases')}
+                onMouseLeave={handleMouseLeave}
                     >
                       <div className="navbar_dropdwn-toggle w-dropdown-toggle">
                             <div>Use Cases</div>
@@ -120,6 +129,8 @@ const Header = () => {
                         data-delay={200}
                         data-w-id="ce73bc21-47e3-718d-4aed-ec1abf19dc6c"
                         className={`navbar_menu-dropdown w-dropdown ${featuresOpen ? 'open' : ''}`}
+                        onMouseEnter={() => handleMouseEnter('features')}
+                        onMouseLeave={handleMouseLeave}
                     >
                        <div className="navbar_dropdwn-toggle w-dropdown-toggle">
                             <div>Features</div>
@@ -214,6 +225,8 @@ const Header = () => {
                         data-delay={200}
                         data-w-id="ce73bc21-47e3-718d-4aed-ec1abf19dc82"
                         className={`navbar_menu-dropdown w-dropdown ${resourcesOpen ? 'open' : ''}`}
+                onMouseEnter={() => handleMouseEnter('resources')}
+                onMouseLeave={handleMouseLeave}
                     >
                          <div className="navbar_dropdwn-toggle w-dropdown-toggle">
                             <div>Resources</div>
